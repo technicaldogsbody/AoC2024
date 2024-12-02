@@ -9,10 +9,9 @@ module FileService =
     let getFileAsString (fileName: string) : string =
         File.ReadAllText($"Data/{fileName}")
 
-    let getFileAsArray (fileName: string) (delimiterPattern: string) : seq<string> =
-        File.ReadAllText($"Data/{fileName}")
-        |> fun contents -> Regex.Split(contents, delimiterPattern)
-        |> Seq.filter (fun line -> not (String.IsNullOrWhiteSpace(line)))
+    let getFileAsArray (fileName: string) : string[] =
+        let contents = File.ReadAllText($"Data/{fileName}")
+        Regex.Split(contents, @"\r\n|\n") |> Array.filter (fun line -> not (String.IsNullOrWhiteSpace(line)))
 
     let getFileAs2dIntArray (fileName: string) (rowDelimiterPattern: string) : int[,] =
         let rows = 
