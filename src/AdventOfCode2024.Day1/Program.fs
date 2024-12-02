@@ -51,21 +51,10 @@ let calculateSimilarityScore (leftList: ResizeArray<int>) (rightList: ResizeArra
     
     similarityScore
 
+let leftList, rightList = parseInputFile "input.txt"
 
-[<EntryPoint>]
-let main argv =
-    // Parse input file
-    let leftList, rightList = parseInputFile "input.txt"
+let tasks = 
+    [ "Calculate Total Distance", (fun () -> calculateTotalDistance leftList rightList :> obj)
+      "Calculate Similarity Score", (fun () -> calculateSimilarityScore leftList rightList :> obj) ]
     
-    // Calculate total distance
-    let totalDistance = calculateTotalDistance leftList rightList
-    let similarityScore = calculateSimilarityScore leftList rightList
-
-    // Define tasks for FancyConsole
-    let tasks = 
-        [ "Calculate Total Distance", (fun () -> totalDistance :> obj)
-          "Calculate Similarity Score", (fun () -> similarityScore :> obj) ]
-        
-    // Output the result using FancyConsole
-    FancyConsole.writeInfo "Historian Hysteria" tasks
-    0
+FancyConsole.writeInfo "Historian Hysteria" tasks
