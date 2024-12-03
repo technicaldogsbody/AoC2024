@@ -9,7 +9,6 @@ var tasks = new List<(string, Func<object>)>
     ("Calculate Similarity Score", () => CalculateSimilarityScore(leftList, rightList))
 };
 
-// Output results using FancyConsole
 FancyConsole.WriteInfo("Historian Hysteria", tasks);
 
 static (List<int> LeftList, List<int> RightList) ParseInputFile(string filename)
