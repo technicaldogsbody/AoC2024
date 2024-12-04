@@ -48,4 +48,21 @@ public static class FileService
         return rows.Length == 0 ?
             new() : rows.Select(t => t.Split(" ")).Select(row => row.Select(int.Parse).ToList()).ToList();
     }
+
+    public static char[,] GetFileAs2dCharArray(string fileName)
+    {
+        var lines = GetFileAsArray(fileName).ToArray();
+        int rows = lines.Length;
+        int cols = lines[0].Length;
+
+        var grid = new char[rows, cols];
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                grid[i, j] = lines[i][j];
+            }
+        }
+        return grid;
+    }
 }
