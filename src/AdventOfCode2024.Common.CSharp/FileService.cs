@@ -11,10 +11,22 @@ public static class FileService
         return contents;
     }
 
-    public static IEnumerable<string> GetFileAsArray(string fileName, string delimiterPattern = @"\r\n|\n")
+    public static string[] GetFileAsArray(string fileName, string delimiterPattern = @"\r\n|\n")
     {
         var contents = File.ReadAllText($"Data/{fileName}");
-        return Regex.Split(contents, delimiterPattern).Where(line => !string.IsNullOrEmpty(line));
+        return Regex.Split(contents, delimiterPattern).Where(line => !string.IsNullOrEmpty(line)).ToArray();
+    }
+
+    public static int[] GetFileAsIntArray(string fileName, string delimiterPattern = @"\r\n|\n")
+    {
+        var contents = File.ReadAllText($"Data/{fileName}");
+        return Regex.Split(contents, delimiterPattern).Where(line => !string.IsNullOrEmpty(line)).Select(int.Parse).ToArray();
+    }
+
+    public static long[] GetFileAsLongArray(string fileName, string delimiterPattern = @"\r\n|\n")
+    {
+        var contents = File.ReadAllText($"Data/{fileName}");
+        return Regex.Split(contents, delimiterPattern).Where(line => !string.IsNullOrEmpty(line)).Select(long.Parse).ToArray();
     }
 
     public static int[,] GetFileAs2dIntArray(string fileName, string rowDelimiterPattern = @"\r\n|\n")

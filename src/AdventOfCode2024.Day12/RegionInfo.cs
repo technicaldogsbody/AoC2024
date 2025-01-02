@@ -1,0 +1,1 @@
+﻿record RegionInfo(int Area, int Measure);
